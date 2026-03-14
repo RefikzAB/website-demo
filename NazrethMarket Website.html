@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nazreth Market — Authentic Ethiopian Food & Butcher</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --red: #C0392B;
+      --gold: #D4A017;
+      --green: #1A7A3C;
+      --cream: #FDF6E3;
+      --dark: #1A0A00;
+      --charcoal: #2C1A0E;
+      --amber: #E8820C;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(26, 10, 0, 0.93);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--gold); letter-spacing: 0.03em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--cream); text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 8rem 3rem 4rem;
+      position: relative; overflow: hidden;
+      background: var(--dark);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 40%, rgba(212,160,23,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(192,57,43,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 90%, rgba(26,122,60,0.12) 0%, transparent 50%);
+      z-index: 0;
+    }
+    .hero-pattern {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.07;
+      background-image: repeating-linear-gradient(
+        45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%
+      );
+      background-size: 20px 20px;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900; line-height: 0.95;
+      color: var(--cream);
+      animation: fadeUp 0.9s 0.1s ease both;
+    }
+    .hero-title span { color: var(--gold); display: block; }
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1.1rem; font-weight: 300; color: rgba(253,246,227,0.75);
+      max-width: 480px; line-height: 1.7;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+    .hero-ctas {
+      margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 1s 0.35s ease both;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      background: var(--red); color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+      border: 2px solid var(--red);
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-primary:hover { background: transparent; color: var(--red); }
+    .btn-outline {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      background: transparent; color: var(--gold);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+      border: 2px solid var(--gold);
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: var(--gold); color: var(--dark); }
+    .hero-flags {
+      position: absolute; bottom: 2.5rem; right: 3rem; z-index: 1;
+      display: flex; gap: 0; overflow: hidden; border-radius: 2px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      animation: fadeUp 1s 0.5s ease both;
+    }
+    .flag-stripe { width: 18px; height: 60px; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 3rem; }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900;
+      line-height: 1.1; color: var(--dark);
+    }
+    .section-title.light { color: var(--cream); }
+    .divider {
+      width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      margin: 1.2rem 0 2rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: #fff;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: center;
+    }
+    .about-text p {
+      font-size: 1.05rem; line-height: 1.85; color: #4a3020;
+      margin-bottom: 1.2rem;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-frame {
+      width: 100%; padding-bottom: 120%;
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--red) 0%, var(--amber) 40%, var(--gold) 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-img-frame .big-emoji {
+      font-size: 8rem; opacity: 0.8;
+      animation: float 4s ease-in-out infinite;
+    }
+    .about-badge {
+      position: absolute; bottom: -1.5rem; left: -1.5rem;
+      background: var(--green); color: #fff;
+      padding: 1.2rem 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      box-shadow: 6px 6px 0 var(--dark);
+    }
+    .about-badge span { display: block; font-family: 'Barlow', sans-serif; font-size: 0.8rem; font-weight: 400; opacity: 0.85; }
+
+    /* ── MENU ── */
+    #menu { background: var(--dark); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .menu-card {
+      background: var(--charcoal);
+      border: 1px solid rgba(212,160,23,0.2);
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s;
+      cursor: default;
+    }
+    .menu-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+    .menu-card-img {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4.5rem;
+      background: linear-gradient(135deg, #2C1A0E 0%, #3D2410 100%);
+    }
+    .menu-card-body { padding: 1.2rem 1.4rem 1.5rem; }
+    .menu-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .menu-card-desc { font-size: 0.88rem; color: rgba(253,246,227,0.65); line-height: 1.6; }
+    .menu-card-tag {
+      display: inline-block; margin-top: 0.9rem;
+      padding: 0.2rem 0.7rem;
+      background: rgba(192,57,43,0.25); color: var(--red);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; border: 1px solid rgba(192,57,43,0.4);
+    }
+
+    /* ── BUTCHER ── */
+    #butcher {
+      background: var(--red);
+      position: relative; overflow: hidden;
+    }
+    .butcher-bg {
+      position: absolute; inset: 0; opacity: 0.06;
+      background-image: repeating-linear-gradient(
+        -45deg, #fff 0, #fff 1px, transparent 0, transparent 50%
+      );
+      background-size: 20px 20px;
+    }
+    .butcher-inner {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .butcher-text .section-label { color: var(--gold); }
+    .butcher-text .section-title { color: #fff; }
+    .butcher-text p { color: rgba(255,255,255,0.85); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.2rem; }
+    .cuts-list {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 2rem;
+    }
+    .cut-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      color: #fff; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem; font-weight: 600; letter-spacing: 0.05em;
+    }
+    .cut-dot { width: 8px; height: 8px; background: var(--gold); flex-shrink: 0; }
+    .butcher-visual {
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .butcher-circle {
+      width: 340px; height: 340px; border-radius: 50%;
+      background: rgba(0,0,0,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9rem;
+      border: 3px solid rgba(212,160,23,0.5);
+      box-shadow: 0 0 60px rgba(0,0,0,0.3);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--cream); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 200px 200px;
+      gap: 0.6rem; margin-top: 2.5rem;
+    }
+    .gallery-item {
+      overflow: hidden; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .gallery-item:hover { transform: scale(1.02); z-index: 2; }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+    .gallery-item .g-emoji { font-size: 5rem; }
+    .gallery-item:nth-child(1) .g-emoji { font-size: 9rem; }
+    .g1 { background: linear-gradient(135deg, #7B2D00, #C0392B); }
+    .g2 { background: linear-gradient(135deg, #1A5C2E, #27AE60); }
+    .g3 { background: linear-gradient(135deg, #8B6914, #D4A017); }
+    .g4 { background: linear-gradient(135deg, #1A0A00, #4A2500); }
+    .g5 { background: linear-gradient(135deg, #C0392B, #E8820C); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0); transition: background 0.3s;
+      display: flex; align-items: flex-end; padding: 1rem;
+    }
+    .gallery-item:hover .gallery-overlay { background: rgba(0,0,0,0.4); }
+    .gallery-caption {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #fff;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-caption { opacity: 1; }
+
+    /* ── ORDER / CONTACT ── */
+    #contact {
+      background: var(--charcoal);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+    }
+    .contact-info .section-title { color: var(--cream); }
+    .contact-info p { color: rgba(253,246,227,0.7); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem; }
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.2rem;
+    }
+    .contact-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .contact-detail-text strong { display: block; color: var(--gold); font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    .contact-detail-text span { color: rgba(253,246,227,0.75); font-size: 0.95rem; }
+
+    .order-form { background: rgba(255,255,255,0.04); padding: 2rem; border: 1px solid rgba(212,160,23,0.2); }
+    .form-title {
+      font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(253,246,227,0.6); margin-bottom: 0.4rem;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 0.8rem 1rem;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(212,160,23,0.25);
+      color: var(--cream); font-family: 'Barlow', sans-serif; font-size: 0.95rem;
+      outline: none; transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--gold);
+    }
+    .form-group textarea { min-height: 100px; resize: vertical; }
+    .form-group select option { background: var(--charcoal); }
+    .btn-submit {
+      width: 100%; padding: 1rem;
+      background: var(--gold); color: var(--dark);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-submit:hover { background: var(--amber); }
+    .btn-submit:active { transform: scale(0.98); }
+
+    /* ── LOCATION ── */
+    #location { background: #fff; }
+    .location-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .hours-grid { margin-top: 1.5rem; }
+    .hours-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem 0; border-bottom: 1px solid rgba(0,0,0,0.08);
+      font-size: 0.95rem;
+    }
+    .hours-row .day { font-weight: 600; color: var(--charcoal); }
+    .hours-row .time { color: var(--green); font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600; }
+    .hours-row .closed { color: var(--red); }
+    .map-placeholder {
+      width: 100%; height: 300px;
+      background: linear-gradient(135deg, #e8d5b0 0%, #d4b896 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; position: relative; overflow: hidden;
+      border: 2px solid rgba(212,160,23,0.3);
+    }
+    .map-pin {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -70%);
+      font-size: 3rem;
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+    .map-addr {
+      margin-top: 1rem; font-size: 1rem; color: var(--charcoal);
+      font-weight: 500; line-height: 1.6;
+    }
+    .map-addr strong { color: var(--red); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 3rem;
+      display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+      border-top: 3px solid var(--gold);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900; color: var(--gold);
+    }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .footer-links a {
+      color: rgba(253,246,227,0.5); text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem;
+      font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .social-row { display: flex; gap: 1rem; }
+    .social-btn {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(212,160,23,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; cursor: pointer; transition: background 0.2s;
+      text-decoration: none;
+    }
+    .social-btn:hover { background: rgba(212,160,23,0.2); }
+    .footer-copy { font-size: 0.8rem; color: rgba(253,246,227,0.3); }
+
+    /* ── REVIEWS ── */
+    #reviews { background: var(--dark); }
+    .reviews-header { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+    .google-badge {
+      display: flex; align-items: center; gap: 0.8rem;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(212,160,23,0.25);
+      padding: 0.8rem 1.4rem;
+    }
+    .google-badge-logo { font-size: 1.5rem; }
+    .google-badge-text { font-family: 'Barlow Condensed', sans-serif; }
+    .google-badge-score { font-size: 1.6rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .google-badge-sub { font-size: 0.75rem; color: rgba(253,246,227,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+    .stars { color: var(--gold); letter-spacing: 0.05em; font-size: 1rem; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .review-card {
+      background: var(--charcoal);
+      border: 1px solid rgba(212,160,23,0.15);
+      padding: 1.8rem;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+    }
+    .review-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .review-card::before {
+      content: '\201C';
+      position: absolute; top: 1rem; right: 1.4rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem; line-height: 1;
+      color: rgba(212,160,23,0.15);
+      pointer-events: none;
+    }
+    .review-top { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .reviewer-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), var(--amber));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+    .reviewer-info { flex: 1; }
+    .reviewer-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; color: var(--cream); letter-spacing: 0.05em; }
+    .review-date { font-size: 0.78rem; color: rgba(253,246,227,0.4); margin-top: 0.1rem; }
+    .review-stars { margin-bottom: 0.8rem; font-size: 0.85rem; }
+    .review-text { font-size: 0.95rem; color: rgba(253,246,227,0.75); line-height: 1.75; }
+    .reviews-cta { text-align: center; margin-top: 3rem; }
+    .reviews-cta a {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(253,246,227,0.5); text-decoration: none;
+      border-bottom: 1px solid rgba(253,246,227,0.2);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .reviews-cta a:hover { color: var(--gold); border-color: var(--gold); }
+
+    @media (max-width: 900px) {
+      .reviews-header { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 40px rgba(212,160,23,0.2); }
+      50%       { box-shadow: 0 0 80px rgba(212,160,23,0.45); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, -70%); }
+      50%       { transform: translate(-50%, -90%); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      section { padding: 4rem 1.5rem; }
+      #about, .butcher-inner, #contact, .location-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+      .gallery-item:nth-child(4) { grid-column: span 2; }
+      .about-badge { position: static; margin-top: 1rem; display: inline-block; box-shadow: 4px 4px 0 var(--dark); }
+      .butcher-circle { width: 220px; height: 220px; font-size: 6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Nazreth Market</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#butcher">Butcher</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Order</a></li>
+    <li><a href="#location">Location</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">🇪🇹 Authentic Ethiopian Experience</div>
+    <h1 class="hero-title">
+      Nazreth
+      <span>Market</span>
+    </h1>
+    <p class="hero-sub">
+      From the heart of Ethiopia to your table — bold flavors, rich traditions, and the freshest cuts of meat you'll find in the city.
+    </p>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn-primary">Explore Our Menu</a>
+      <a href="#butcher" class="btn-outline">Fresh Butcher Cuts</a>
+    </div>
+  </div>
+  <div class="hero-flags">
+    <div class="flag-stripe" style="background:#078930;"></div>
+    <div class="flag-stripe" style="background:#FCDD09;"></div>
+    <div class="flag-stripe" style="background:#DA121A;"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text">
+    <div class="section-label">Our Story</div>
+    <h2 class="section-title">A Taste of Home, Far From Home</h2>
+    <div class="divider"></div>
+    <p>
+      Nazreth Market was born from a deep love for Ethiopian culture, community, and cuisine. Named after the vibrant city of Nazreth (Adama) in the heart of Ethiopia, we bring the warmth and richness of our homeland straight to your neighborhood.
+    </p>
+    <p>
+      We are more than a restaurant — we are a market, a butcher, and a gathering place. Whether you're craving the communal joy of injera and wot, or you need the finest fresh-cut meat for your family meal, we have you covered with quality and care.
+    </p>
+    <p>
+      Every dish we serve honors the recipes passed down through generations. Every cut of meat is hand-selected for freshness and quality. Come as a customer, leave as family.
+    </p>
+  </div>
+  <div class="about-visual">
+    <div class="about-img-frame">
+      <div class="big-emoji">🍽️</div>
+    </div>
+    <div class="about-badge">
+      Family Owned
+      <span>Est. in the Community</span>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-label">Ethiopian Food</div>
+  <h2 class="section-title light">Our Signature Dishes</h2>
+  <div class="divider"></div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-card-img">🫓</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Injera Combo</div>
+        <div class="menu-card-desc">Our soft, spongy teff injera served with a colorful spread of tibs, lentil, and vegetable wots.</div>
+        <span class="menu-card-tag">Signature</span>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">🥩</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Kitfo</div>
+        <div class="menu-card-desc">Finely minced beef seasoned with mitmita and niter kibbeh. Served raw, rare, or well-done to your preference.</div>
+        <span class="menu-card-tag">Specialty</span>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">🍖</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Tibs</div>
+        <div class="menu-card-desc">Sautéed strips of beef or lamb with rosemary, garlic, jalapeños, and onions — boldly spiced and aromatic.</div>
+        <span class="menu-card-tag">Popular</span>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">🫘</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Misir Wot</div>
+        <div class="menu-card-desc">Red lentils slow-simmered in berbere spice, a deeply earthy and satisfying Ethiopian staple.</div>
+        <span class="menu-card-tag">Vegetarian</span>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">🍗</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Doro Wot</div>
+        <div class="menu-card-desc">Ethiopia's beloved chicken stew, slow-cooked in rich berbere sauce with hard-boiled eggs and warm spices.</div>
+        <span class="menu-card-tag">Classic</span>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">🥗</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Vegetarian Feast</div>
+        <div class="menu-card-desc">A generous platter of gomen, ayib, shiro, and seasonal vegetables — perfect for fasting or veggie lovers.</div>
+        <span class="menu-card-tag">Vegetarian</span>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">☕</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Ethiopian Coffee</div>
+        <div class="menu-card-desc">Experience the traditional Ethiopian coffee ceremony — rich, unfiltered, and served with incense and popcorn.</div>
+        <span class="menu-card-tag">Drink</span>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">🫙</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Tej (Honey Wine)</div>
+        <div class="menu-card-desc">Traditional Ethiopian honey wine, mildly fermented with gesho hops. Sweet, earthy, and uniquely Ethiopian.</div>
+        <span class="menu-card-tag">Drink</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUTCHER -->
+<section id="butcher">
+  <div class="butcher-bg"></div>
+  <div class="butcher-inner">
+    <div class="butcher-text">
+      <div class="section-label">Fresh Butcher</div>
+      <h2 class="section-title">Premium Raw Cut Meat</h2>
+      <div class="divider"></div>
+      <p>
+        At Nazreth Market, our butcher counter is a cornerstone of what we do. We hand-select every animal for quality and freshness, then expertly cut to your exact needs. Whether for kitfo, tibs, or your own family recipe, our meat is unmatched.
+      </p>
+      <p>
+        We source fresh, hormone-free beef and lamb daily. Our butchers understand Ethiopian and East African cuts — tell us what you're making and we'll prepare it perfectly.
+      </p>
+      <div class="cuts-list">
+        <div class="cut-item"><div class="cut-dot"></div> Fresh Beef Cuts</div>
+        <div class="cut-item"><div class="cut-dot"></div> Lamb Cuts</div>
+        <div class="cut-item"><div class="cut-dot"></div> Kitfo-Grade Mince</div>
+        <div class="cut-item"><div class="cut-dot"></div> Tibs Strips</div>
+        <div class="cut-item"><div class="cut-dot"></div> Whole Leg / Shoulder</div>
+        <div class="cut-item"><div class="cut-dot"></div> Bone-In Cuts</div>
+        <div class="cut-item"><div class="cut-dot"></div> Custom Orders</div>
+        <div class="cut-item"><div class="cut-dot"></div> Bulk Quantities</div>
+      </div>
+    </div>
+    <div class="butcher-visual">
+      <div class="butcher-circle">🔪</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-label">Gallery</div>
+  <h2 class="section-title">A Feast for the Eyes</h2>
+  <div class="divider"></div>
+  <div class="gallery-grid">
+    <div class="gallery-item g1">
+      <div class="g-emoji">🍽️</div>
+      <div class="gallery-overlay"><span class="gallery-caption">Injera Spread</span></div>
+    </div>
+    <div class="gallery-item g2">
+      <div class="g-emoji">🌿</div>
+      <div class="gallery-overlay"><span class="gallery-caption">Fresh Herbs</span></div>
+    </div>
+    <div class="gallery-item g3">
+      <div class="g-emoji">🥩</div>
+      <div class="gallery-overlay"><span class="gallery-caption">Premium Cuts</span></div>
+    </div>
+    <div class="gallery-item g4">
+      <div class="g-emoji">☕</div>
+      <div class="gallery-overlay"><span class="gallery-caption">Coffee Ceremony</span></div>
+    </div>
+    <div class="gallery-item g5">
+      <div class="g-emoji">🔥</div>
+      <div class="gallery-overlay"><span class="gallery-caption">Open Grill</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="reviews-header">
+    <div>
+      <div class="section-label">What People Are Saying</div>
+      <h2 class="section-title light">Google Reviews</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="google-badge">
+      <div class="google-badge-logo">🌐</div>
+      <div class="google-badge-text">
+        <div class="google-badge-score">4.3 <span class="stars">★★★★☆</span></div>
+        <div class="google-badge-sub">Based on 244+ Google Reviews</div>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-grid">
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="reviewer-avatar">A</div>
+        <div class="reviewer-info">
+          <div class="reviewer-name">Amira J.</div>
+          <div class="review-date">Google Review</div>
+        </div>
+      </div>
+      <div class="review-stars stars">★★★★★</div>
+      <div class="review-text">I am surprised this place was not on the map sooner. It is delicious, fresh, and ALWAYS busy! I came here on a Saturday morning and it was packed — always a great sign. The food speaks for itself.</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="reviewer-avatar" style="background: linear-gradient(135deg, var(--green), #27AE60);">T</div>
+        <div class="reviewer-info">
+          <div class="reviewer-name">Tadesse M.</div>
+          <div class="review-date">Google Review</div>
+        </div>
+      </div>
+      <div class="review-stars stars">★★★★★</div>
+      <div class="review-text">They are very busy during lunch time because the customers know — fresh beef for Kitfo, Kurt, and Tibs. I love it. This is the real deal, exactly how we make it back home. Cannot recommend enough.</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="reviewer-avatar" style="background: linear-gradient(135deg, var(--gold), var(--amber));">S</div>
+        <div class="reviewer-info">
+          <div class="reviewer-name">Sara K.</div>
+          <div class="review-date">Google Review</div>
+        </div>
+      </div>
+      <div class="review-stars stars">★★★★★</div>
+      <div class="review-text">Premium meat at a reasonable price. This is the best tere sega and tibs in all of Seattle. A lot of different item offerings in the market area. Also a great place to buy fresh injera. A hidden gem.</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="reviewer-avatar" style="background: linear-gradient(135deg, #5B2C6F, #8E44AD);">M</div>
+        <div class="reviewer-info">
+          <div class="reviewer-name">Michael D.</div>
+          <div class="review-date">Google Review</div>
+        </div>
+      </div>
+      <div class="review-stars stars">★★★★★</div>
+      <div class="review-text">The Kurt Tibs and Injera here are exceptional — authentic taste and beautiful presentation. You can truly feel the effort that goes into every dish. A go-to spot for anyone craving genuine Ethiopian flavors.</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="reviewer-avatar" style="background: linear-gradient(135deg, #1A5C2E, #27AE60);">E</div>
+        <div class="reviewer-info">
+          <div class="reviewer-name">Esther F.</div>
+          <div class="review-date">Google Review</div>
+        </div>
+      </div>
+      <div class="review-stars stars">★★★★☆</div>
+      <div class="review-text">Popped in to find some grocery supplies and was pleasantly surprised. They carry injera, spices, legumes, lentils, and more. The market side is a great resource for the community. Will be coming back for the food next time!</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="reviewer-avatar" style="background: linear-gradient(135deg, #C0392B, #E8820C);">B</div>
+        <div class="reviewer-info">
+          <div class="reviewer-name">Blen H.</div>
+          <div class="review-date">Google Review</div>
+        </div>
+      </div>
+      <div class="review-stars stars">★★★★★</div>
+      <div class="review-text">The welcoming atmosphere and attentive staff make every visit special. Customers feel genuinely cared for. The roasted spicy meats and flavorful sides are out of this world. This place is full of warmth and community spirit.</div>
+    </div>
+
+  </div>
+  <div class="reviews-cta">
+    <a href="https://www.google.com/search?q=nazreth+market+seattle" target="_blank" rel="noopener">
+      ★ Read all reviews on Google &rarr;
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT / ORDER -->
+<section id="contact">
+  <div class="contact-info">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title light">Order or Ask Us Anything</h2>
+    <div class="divider"></div>
+    <p>
+      Ready to enjoy the best Ethiopian food in the city? Call us, stop by, or send a message below for custom meat orders or catering inquiries.
+    </p>
+    <div class="contact-detail">
+      <div class="contact-icon">📞</div>
+      <div class="contact-detail-text">
+        <strong>Phone</strong>
+        <span>(555) 123-4567</span>
+      </div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-icon">✉️</div>
+      <div class="contact-detail-text">
+        <strong>Email</strong>
+        <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f49d9a929bb49a958e8691809c9995869f9180da979b99">[email&#160;protected]</a></span>
+      </div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-icon">📍</div>
+      <div class="contact-detail-text">
+        <strong>Address</strong>
+        <span>123 Market Street, Your City, ST 00000</span>
+      </div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-icon">🕐</div>
+      <div class="contact-detail-text">
+        <strong>Hours</strong>
+        <span>Mon–Sat 9am–9pm · Sun 10am–7pm</span>
+      </div>
+    </div>
+  </div>
+  <div class="order-form">
+    <div class="form-title">Send Us a Message</div>
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" placeholder="Full Name" />
+    </div>
+    <div class="form-group">
+      <label>Phone / Email</label>
+      <input type="text" placeholder="How can we reach you?" />
+    </div>
+    <div class="form-group">
+      <label>Inquiry Type</label>
+      <select>
+        <option>Food Order / Takeout</option>
+        <option>Custom Meat Order</option>
+        <option>Catering Inquiry</option>
+        <option>General Question</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Message</label>
+      <textarea placeholder="Tell us what you need..."></textarea>
+    </div>
+    <button class="btn-submit">Send Message</button>
+  </div>
+</section>
+
+<!-- LOCATION & HOURS -->
+<section id="location">
+  <div class="section-label">Find Us</div>
+  <h2 class="section-title">Location & Hours</h2>
+  <div class="divider"></div>
+  <div class="location-inner">
+    <div>
+      <div class="map-placeholder">
+        <div class="map-pin">📍</div>
+      </div>
+      <div class="map-addr">
+        <strong>Nazreth Market</strong><br/>
+        123 Market Street<br/>
+        Your City, ST 00000
+      </div>
+    </div>
+    <div>
+      <div class="hours-grid">
+        <div class="hours-row"><span class="day">Monday</span><span class="time">9:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span class="day">Tuesday</span><span class="time">9:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span class="day">Wednesday</span><span class="time">9:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span class="day">Thursday</span><span class="time">9:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span class="day">Friday</span><span class="time">9:00 AM – 10:00 PM</span></div>
+        <div class="hours-row"><span class="day">Saturday</span><span class="time">9:00 AM – 10:00 PM</span></div>
+        <div class="hours-row"><span class="day">Sunday</span><span class="time">10:00 AM – 7:00 PM</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Nazreth Market</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#butcher">Butcher</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Order</a></li>
+    <li><a href="#location">Location</a></li>
+  </ul>
+  <div class="social-row">
+    <a class="social-btn" href="#">📘</a>
+    <a class="social-btn" href="#">📸</a>
+    <a class="social-btn" href="#">🐦</a>
+  </div>
+  <div class="footer-copy"
